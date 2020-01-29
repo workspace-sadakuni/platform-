@@ -1,0 +1,25 @@
+
+<div class="main posts-index">
+  <div class="container">
+    <% @posts.each do |post| %>
+      <div class="posts-index-item">
+        <div class="post-left">
+        <% if post.user.image_name %>
+          <img src="<%= "/user_images/#{post.user.image_name}"%>">
+        <% elsif post.user.image_url %>
+          <img src="<%= "#{post.user.image_url}" %>">
+        <% end %>
+        </div>
+        <div class="post-right">
+          <div class="post-user-name">
+            <%= link_to(post.user.name, "/users/#{post.user.id}")%>
+          </div>
+          <%= link_to(post.title, "/posts/#{post.id}") %>
+        </div>
+      </div>
+    <% end %>
+
+  </div>
+  <%= paginate @posts %>
+</div>
+

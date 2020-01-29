@@ -1,0 +1,68 @@
+<div class="main posts-show">
+  <div class="container">
+    <div class="posts-show-item">
+      <div class="post-user-name">
+        <% if @user.image_name %>
+            <img src="<%= "/user_images/#{@user.image_name}" %>">
+        <% elsif @user.image_url %>
+            <img src="<%= "#{@user.image_url}" %>">
+        <% end %>
+        <%= link_to(@user.name, "/users/#{@user.id}") %>
+      </div>
+      <div class="post-title">
+        <p>
+          <%= @post.title %>
+        </p>
+      </div>
+      <div class="post-period">
+        <p>
+          目標期間:<%= @post.started_at %>~<%= @post.finish_at %>
+        </p>
+      </div>
+      <div class="post-content">
+        <p>
+        	<%= simple_format(@post.content) %>
+        </p>
+      </div>
+      <div class="post-time">
+        <%= @post.created_at.strftime('%Y年 %m月 %d日 %H時 %M分') %>
+      </div>
+<div class="post-applicant">
+      <% if Applicant.find_by(user_id: @current_user.id, post_id: @post.id) %>
+        <%= link_to("/applicant/#{@post.id}/destroy", {method: "post"}) do %>
+          <span class="fa fa-hand-paper like-btn-unlike"></span>
+        <% end %>
+      <% else %>
+        <%= link_to("/applicant/#{@post.id}/create", {method: "post"}) do %>
+          <span class="fa fa-hand-paper like-btn"></span>
+        <% end %>
+      <% end %>
+      <div class="applicants">
+      <%= @applicants_count %>
+      </div>
+
+      <% if Applicant.find_by(user_id: @current_user.id, post_id: @post.id, achieved: "t") %>
+        <%= link_to("/applicant/#{@post.id}/destroy_achieved", {method: "post"}) do %>
+          <span class="fa fa-flag unachieved-btn"></span>
+        <% end %>
+      <% else %>
+        <%= link_to("/applicant/#{@post.id}/achieved", {method: "post"}) do %>
+          <span class="fa fa-flag achieved-btn"></span>
+        <% end %>
+      <% end %>
+      <% if @achieved_percentage %>
+        <div class="achieved_per">
+          <%= "#{@achieved_percentage}%" %>
+        <div>
+      <% end %>
+</div>
+
+      <% if @post.user_id == @current_user.id %>
+        <div class="post-menus">
+          <%= link_to("編集", "/posts/#{@post.id}/edit") %>
+          <%= link_to("削除", "/posts/#{@post.id}/destroy", {method: "post"}) %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

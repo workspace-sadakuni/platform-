@@ -1,0 +1,14 @@
+
+<div class="main top-main">
+  <div class="top-message">
+    <h2>仲間がいれば<br>モチベーションもUP！！</h2>
+    <p>自分の目標をつぶやいてみよう！</p>
+  </div>
+  
+    <% if @current_user %>
+    <div class="about-menu">
+    <%= link_to("Platformとは", "/about") %>
+    </div>
+    <% end %>
+  
+</div>

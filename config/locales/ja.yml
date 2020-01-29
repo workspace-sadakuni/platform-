@@ -1,0 +1,16 @@
+ja:
+  activerecord:
+    attributes:
+      post:
+        Name: 名前
+        Title: タイトル
+        Content: 本文
+        Password: パスワード
+        Email: メールアドレス
+  views:
+    pagination:
+      first: 最初
+      last: 最後
+      previous: 前
+      next: 次
+      truncate: ...

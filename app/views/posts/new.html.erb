@@ -1,0 +1,21 @@
+<div class="main posts-new">
+  <div class="container">
+    <h1 class="form-heading">投稿する</h1>
+    <%= form_tag("/posts/create") do %>
+	    <div class="form">
+	      <div class="form-body">
+          <% @post.errors.full_messages.each do |message| %>
+            <div class="form-error">
+              <%= message %>
+            </div>
+          <% end %>
+          <input name="title" placeholder="目標 (例:12月中に本を1冊読む！)" value="<%= @post.title %>">
+          <input name="started_at" placeholder="目標開始日 (例:2019年12月1日)" value="<%= @post.started_at %>">
+          <input name="finish_at" placeholder="目標達成日 (例:2019年12月31日)" value="<%= @post.finish_at %>">
+	        <textarea name="content" placeholder="目標の具体的な内容"><%= @post.content %></textarea>
+	        <input type="submit" value="投稿">
+	      </div>
+	    </div>
+    <% end %>
+  </div>
+</div>
